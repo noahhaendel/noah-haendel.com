@@ -3,611 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah – Leben in Georgien</title>
+<title>Auswandern nach Georgien 🇬🇪 – Unsere Reise als Familie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Inter',sans-serif;
-  background:#050505;
-  color:#e8e8e8;
-  overflow-x:hidden;
-}
+  :root {
+    --wine: #722F37;
+    --gold: #D4A843;
+    --cream: #FDF6EC;
+    --dark: #1A1A1A;
+    --forest: #2D5016;
+    --sky: #E8F0F2;
+  }
 
-/* Grain overlay */
-body::after{
-  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
-  opacity:.03;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+  html { scroll-behavior: smooth; }
 
-/* Floating particles */
-.particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.particle{
-  position:absolute;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,68,68,.4),transparent 70%);
-  animation:float linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(100vh) scale(0);opacity:0}
-  10%{opacity:1}
-  90%{opacity:1}
-  100%{transform:translateY(-10vh) scale(1);opacity:0}
-}
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: #fff;
+    overflow-x: hidden;
+  }
 
-/* Nav */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:1.2rem 2rem;
-  display:flex;justify-content:space-between;align-items:center;
-  background:rgba(5,5,5,0);
-  backdrop-filter:blur(0px);
-  transition:all .4s ease;
-}
-nav.scrolled{
-  background:rgba(5,5,5,.85);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,.05);
-}
-.nav-logo{
-  font-weight:800;font-size:1.1rem;
-  display:flex;align-items:center;gap:.5rem;
-}
-.nav-logo span{color:#ff4444}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{
-  color:#999;text-decoration:none;font-size:.9rem;font-weight:500;
-  transition:color .3s;position:relative;
-}
-.nav-links a:hover{color:#fff}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;
-  width:0;height:2px;background:#ff4444;transition:width .3s;
-}
-.nav-links a:hover::after{width:100%}
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background:
+      linear-gradient(135deg, rgba(26,26,26,0.55) 0%, rgba(45,80,22,0.45) 50%, rgba(114,47,55,0.5) 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"><defs><linearGradient id="g" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" stop-color="%232D5016"/><stop offset="50%25" stop-color="%234A7C2E"/><stop offset="100%25" stop-color="%23722F37"/></linearGradient></defs><rect fill="url(%23g)" width="1440" height="900"/><g opacity="0.15"><circle cx="200" cy="300" r="180" fill="%23D4A843"/><circle cx="1200" cy="600" r="250" fill="%23D4A843"/><circle cx="700" cy="150" r="100" fill="%23fff"/></g></svg>') center/cover no-repeat;
+    padding: 2rem;
+  }
 
-/* Hero */
-.hero{
-  position:relative;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden;
-}
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background:url('https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1920&q=80') center/cover no-repeat;
-  filter:brightness(.4) saturate(1.2);
-  transform:scale(1.1);
-  animation:heroBgZoom 20s ease-in-out infinite alternate;
-}
-@keyframes heroBgZoom{
-  0%{transform:scale(1.1) translateY(0)}
-  100%{transform:scale(1.15) translateY(-10px)}
-}
-.hero-overlay{
-  position:absolute;inset:0;z-index:1;
-  background:
-    radial-gradient(ellipse at 50% 50%, rgba(255,50,50,.08) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(5,5,5,.2) 0%, rgba(5,5,5,0) 40%, rgba(5,5,5,0) 60%, rgba(5,5,5,1) 100%);
-}
-.hero-content{position:relative;z-index:2;max-width:850px;padding:2rem}
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212,168,67,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
 
-/* Profile */
-.profile-wrap{
-  position:relative;width:160px;height:160px;margin:0 auto 2rem;
-  opacity:0;animation:fadeScale .8s .2s forwards;
-}
-.profile-ring{
-  position:absolute;inset:-6px;border-radius:50%;
-  background:conic-gradient(#ff4444,#ff8888,#ffffff,#ff8888,#ff4444);
-  animation:spin 8s linear infinite;
-}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.profile-ring-inner{
-  position:absolute;inset:2px;border-radius:50%;background:#050505;
-}
-.profile-img{
-  position:relative;z-index:1;
-  width:100%;height:100%;border-radius:50%;
-  object-fit:cover;border:4px solid #050505;display:block;
-}
-.profile-status{
-  position:absolute;bottom:8px;right:8px;z-index:2;
-  width:28px;height:28px;border-radius:50%;
-  background:#050505;display:flex;align-items:center;justify-content:center;
-  font-size:14px;border:2px solid #050505;
-}
+  .hero-flag {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+  }
 
-.geo-greeting{
-  font-family:'Noto Sans Georgian',sans-serif;
-  font-size:1rem;color:rgba(255,107,107,.8);
-  letter-spacing:3px;margin-bottom:.8rem;
-  opacity:0;animation:fadeUp .8s .3s forwards;
-}
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.8rem,7vw,5.5rem);
-  font-weight:900;line-height:1.05;margin-bottom:.5rem;
-  opacity:0;animation:fadeUp .8s .5s forwards;
-}
-.hero h1 .highlight{
-  position:relative;display:inline-block;
-}
-.hero h1 .highlight::after{
-  content:'';position:absolute;bottom:.05em;left:-.02em;right:-.02em;
-  height:.35em;background:rgba(255,68,68,.25);
-  border-radius:4px;z-index:-1;
-  transform:skewX(-3deg);
-}
-.hero-subtitle{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.2rem,3vw,1.8rem);
-  font-weight:400;font-style:italic;
-  color:rgba(255,255,255,.5);margin-bottom:1.8rem;
-  opacity:0;animation:fadeUp .8s .65s forwards;
-}
-.hero-desc{
-  font-size:1.05rem;color:#999;line-height:1.8;
-  max-width:580px;margin:0 auto 2.5rem;
-  opacity:0;animation:fadeUp .8s .8s forwards;
-}
-.hero-badges{
-  display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;
-  margin-bottom:2.5rem;
-  opacity:0;animation:fadeUp .8s .7s forwards;
-}
-.badge{
-  display:inline-flex;align-items:center;gap:.4rem;
-  background:rgba(255,255,255,.06);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:50px;padding:.45rem 1rem;
-  font-size:.82rem;color:#bbb;font-weight:500;
-}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:#ff4444;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 
-.hero-cta{
-  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
-  opacity:0;animation:fadeUp .8s .95s forwards;
-}
-.btn{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:1rem 2.2rem;border-radius:14px;
-  font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;
-  text-decoration:none;transition:all .35s cubic-bezier(.4,0,.2,1);
-  cursor:pointer;border:none;position:relative;overflow:hidden;
-}
-.btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
-  opacity:0;transition:opacity .3s;
-}
-.btn:hover::before{opacity:1}
-.btn-primary{
-  background:linear-gradient(135deg,#ff4444,#cc2222);color:#fff;
-  box-shadow:0 4px 30px rgba(255,68,68,.3);
-}
-.btn-primary:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 40px rgba(255,68,68,.45);
-}
-.btn-glass{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);color:#fff;
-  backdrop-filter:blur(10px);
-}
-.btn-glass:hover{
-  background:rgba(255,255,255,.12);transform:translateY(-3px);
-  box-shadow:0 8px 30px rgba(255,255,255,.05);
-}
-.btn svg{width:20px;height:20px;fill:currentColor}
+  .hero-greeting {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
 
-/* Scroll indicator */
-.scroll-ind{
-  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
-  z-index:2;opacity:0;animation:fadeUp .8s 1.4s forwards;
-  display:flex;flex-direction:column;align-items:center;gap:.5rem;
-}
-.scroll-ind span{font-size:.7rem;letter-spacing:2px;color:#555;text-transform:uppercase}
-.scroll-mouse{
-  width:22px;height:34px;border:2px solid #444;border-radius:11px;
-  position:relative;
-}
-.scroll-mouse::after{
-  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
-  width:3px;height:8px;background:#ff4444;border-radius:2px;
-  animation:scrollDot 2s infinite;
-}
-@keyframes scrollDot{0%,100%{opacity:1;transform:translateX(-50%) translateY(0)}50%{opacity:.3;transform:translateX(-50%) translateY(10px)}}
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
 
-/* Sections shared */
-section{position:relative;z-index:1}
-.section-label{
-  font-size:.75rem;font-weight:700;letter-spacing:4px;
-  text-transform:uppercase;color:#ff6b6b;margin-bottom:1rem;
-}
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--gold), #F0D68A, var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-/* Marquee */
-.marquee-wrap{
-  padding:3rem 0;overflow:hidden;
-  border-top:1px solid rgba(255,255,255,.04);
-  border-bottom:1px solid rgba(255,255,255,.04);
-}
-.marquee{
-  display:flex;gap:3rem;
-  animation:marquee 25s linear infinite;
-  width:max-content;
-}
-.marquee-item{
-  font-size:clamp(1rem,2vw,1.3rem);font-weight:700;
-  color:rgba(255,255,255,.08);white-space:nowrap;
-  display:flex;align-items:center;gap:1rem;
-}
-.marquee-item span{color:rgba(255,68,68,.3);font-size:.8em}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
 
-/* About */
-.about{padding:7rem 2rem;max-width:1100px;margin:0 auto}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.about-text h2{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,3rem);
-  font-weight:900;line-height:1.15;margin-bottom:1.5rem;
-}
-.about-text h2 em{font-style:italic;color:#ff6b6b}
-.about-text p{color:#888;line-height:1.85;margin-bottom:1.2rem;font-size:1.02rem}
-.about-text p strong{color:#ccc}
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 42px;
+    background: linear-gradient(135deg, #FF0000, #CC0000);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 60px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 32px rgba(255,0,0,0.3);
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
 
-.about-card{
-  background:linear-gradient(145deg,rgba(255,68,68,.06),rgba(255,255,255,.02));
-  border:1px solid rgba(255,68,68,.1);
-  border-radius:28px;padding:2.5rem;
-  position:relative;overflow:hidden;
-}
-.about-card::before{
-  content:'';position:absolute;top:-40%;right:-40%;
-  width:250px;height:250px;
-  background:radial-gradient(circle,rgba(255,68,68,.12),transparent 70%);
-  border-radius:50%;
-}
-.card-header{
-  display:flex;align-items:center;gap:1rem;margin-bottom:2rem;
-  position:relative;
-}
-.card-flag{font-size:2.8rem}
-.card-header div h3{font-size:1.1rem;font-weight:700}
-.card-header div p{font-size:.85rem;color:#666}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative}
-.stat{
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
-  border-radius:16px;padding:1.3rem;text-align:center;
-  transition:all .3s;
-}
-.stat:hover{background:rgba(255,68,68,.06);border-color:rgba(255,68,68,.15)}
-.stat-val{
-  font-size:1.5rem;font-weight:800;
-  background:linear-gradient(135deg,#ff4444,#ff8888);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.stat-label{font-size:.78rem;color:#666;margin-top:.3rem;letter-spacing:.5px}
+  .cta-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 48px rgba(255,0,0,0.45);
+  }
 
-/* Topics */
-.topics{padding:4rem 2rem 7rem;max-width:1200px;margin:0 auto}
-.topics-header{text-align:center;margin-bottom:3.5rem}
-.topics-header h2{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,2.8rem);font-weight:900;
-}
-.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.topic-card{
-  background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:22px;padding:2rem 1.8rem;
-  transition:all .4s cubic-bezier(.4,0,.2,1);
-  position:relative;overflow:hidden;
-}
-.topic-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 30% 0%,rgba(255,68,68,.08),transparent 60%);
-  opacity:0;transition:opacity .4s;
-}
-.topic-card:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,68,68,.2);
-  box-shadow:0 20px 60px rgba(255,68,68,.08);
-}
-.topic-card:hover::before{opacity:1}
-.topic-icon{
-  font-size:1.8rem;margin-bottom:1.2rem;
-  width:56px;height:56px;display:flex;align-items:center;justify-content:center;
-  background:rgba(255,68,68,.08);border-radius:16px;
-  border:1px solid rgba(255,68,68,.1);
-  position:relative;
-}
-.topic-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;position:relative}
-.topic-card p{color:#666;font-size:.88rem;line-height:1.65;position:relative}
+  .cta-btn svg { width: 28px; height: 28px; fill: #fff; }
 
-/* CTA */
-.cta-section{padding:3rem 2rem 8rem;text-align:center}
-.cta-box{
-  max-width:750px;margin:0 auto;
-  background:linear-gradient(145deg,rgba(255,68,68,.1),rgba(255,68,68,.02));
-  border:1px solid rgba(255,68,68,.15);
-  border-radius:32px;padding:4rem 3rem;
-  position:relative;overflow:hidden;
-}
-.cta-box::before{
-  content:'';position:absolute;top:-60%;right:-20%;
-  width:400px;height:400px;
-  background:radial-gradient(circle,rgba(255,68,68,.12),transparent 60%);
-  border-radius:50%;
-}
-.cta-box::after{
-  content:'';position:absolute;bottom:-40%;left:-20%;
-  width:300px;height:300px;
-  background:radial-gradient(circle,rgba(255,100,100,.06),transparent 60%);
-  border-radius:50%;
-}
-.cta-box h2{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,3.5vw,2.5rem);
-  font-weight:900;margin-bottom:1rem;position:relative;
-}
-.cta-box p{
-  color:#888;margin-bottom:2.5rem;font-size:1.05rem;line-height:1.75;
-  max-width:500px;margin-left:auto;margin-right:auto;position:relative;
-}
-.cta-box .hero-cta{position:relative}
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
 
-/* Footer */
-footer{
-  text-align:center;padding:2.5rem 2rem;
-  border-top:1px solid rgba(255,255,255,.04);
-}
-footer p{color:#444;font-size:.82rem;letter-spacing:.5px}
-footer a{color:#ff6b6b;text-decoration:none;transition:color .3s}
-footer a:hover{color:#ff8888}
-.footer-cross{color:#666;margin-top:.6rem;font-size:.85rem;display:block}
+  .scroll-hint span {
+    display: block;
+    width: 2px;
+    height: 40px;
+    background: var(--gold);
+    margin: 0 auto;
+    animation: scrollPulse 2s ease-in-out infinite;
+    border-radius: 2px;
+  }
 
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeScale{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-.reveal{opacity:0;transform:translateY(35px);transition:all .8s cubic-bezier(.4,0,.2,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
-.reveal-delay-5{transition-delay:.5s}
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
 
-/* Responsive */
-@media(max-width:900px){
-  .topic-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:768px){
-  .about-grid{grid-template-columns:1fr;gap:3rem}
-  .topic-grid{grid-template-columns:1fr}
-  .cta-box{padding:3rem 1.5rem}
-  .profile-wrap{width:130px;height:130px}
-  .nav-links{display:none}
-  nav{padding:1rem 1.5rem}
-}
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 2rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    max-width: 550px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.6;
+  }
+
+  /* ABOUT */
+  .about {
+    background: linear-gradient(180deg, var(--dark) 0%, #0F1A0A 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about::before {
+    content: '☦️';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.03;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,168,67,0.15);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .about-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212,168,67,0.4);
+    background: rgba(255,255,255,0.07);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .about-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .about-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .about-card p {
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  /* TOPICS */
+  .topics {
+    background: linear-gradient(180deg, #0F1A0A 0%, #1A0F10 100%);
+  }
+
+  .topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .topic-tag {
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .topic-tag:hover {
+    background: rgba(212,168,67,0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: scale(1.05);
+  }
+
+  .topic-tag .tag-icon { margin-right: 6px; }
+
+  /* QUOTE */
+  .quote-section {
+    background: linear-gradient(135deg, var(--wine), #4A1520);
+    text-align: center;
+    padding: 5rem 2rem;
+    position: relative;
+  }
+
+  .quote-section::before,
+  .quote-section::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .quote-section::before { top: 3rem; }
+  .quote-section::after { bottom: 3rem; }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--cream);
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
+  }
+
+  .quote-caption {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* CTA FINAL */
+  .final-cta {
+    background: linear-gradient(180deg, #1A0F10 0%, var(--dark) 100%);
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .final-cta .section-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .final-cta p {
+    color: rgba(255,255,255,0.6);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .yt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 48px;
+    background: #FF0000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15rem;
+    border-radius: 60px;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 40px rgba(255,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .yt-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%);
+    transition: 0.6s;
+  }
+
+  .yt-btn:hover::before { transform: translateX(100%); }
+
+  .yt-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 56px rgba(255,0,0,0.4);
+  }
+
+  .yt-btn svg { width: 30px; height: 30px; fill: #fff; }
+
+  .social-links {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: scale(1.1);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  footer .cross { color: var(--gold); font-size: 1rem; display: block; margin-bottom: 0.5rem; }
+
+  /* ANIMATIONS ON SCROLL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .about-grid { grid-template-columns: 1fr; }
+    section { padding: 3.5rem 1.5rem; }
+    .cta-btn, .yt-btn { padding: 16px 32px; font-size: 1rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Particles -->
-<div class="particles" id="particles"></div>
-
-<!-- Nav -->
-<nav id="nav">
-  <div class="nav-logo">🇬🇪 <span>Noah</span></div>
-  <ul class="nav-links">
-    <li><a href="#ueber">Über mich</a></li>
-    <li><a href="#themen">Themen</a></li>
-    <li><a href="https://www.youtube.com/@noahhaendel" target="_blank">YouTube</a></li>
-  </ul>
-</nav>
-
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="profile-wrap">
-      <div class="profile-ring"><div class="profile-ring-inner"></div></div>
-      <img src="noah.jpg" alt="Noah" class="profile-img"
-           onerror="this.style.display='none';this.parentElement.querySelector('.profile-ring').style.display='none';this.parentElement.innerHTML+='<div style=&quot;position:relative;z-index:1;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#ff4444,#cc2222);display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:3.5rem;font-weight:900;color:#fff&quot;>N</div>'">
-      <div class="profile-status">🇬🇪</div>
-    </div>
-
-    <div class="hero-badges">
-      <div class="badge"><div class="badge-dot"></div> Auswanderer</div>
-      <div class="badge">🏔️ Georgien</div>
-      <div class="badge">👨‍👩‍👧 Familie</div>
-      <div class="badge">☦️ Glaube</div>
-    </div>
-
-    <p class="geo-greeting">გამარჯობა – Gamarjoba!</p>
-    <h1>Ich bin <span class="highlight">Noah</span></h1>
-    <p class="hero-subtitle">Leben in Georgien</p>
-    <p class="hero-desc">
-      Wir wandern im März 2026 als Familie von Deutschland nach Georgien aus – 
-      auf der Suche nach mehr Freiheit, Natur und einem selbstbestimmten Leben.
-    </p>
-    <div class="hero-cta">
-      <a href="https://www.youtube.com/@noahhaendel" target="_blank" class="btn btn-primary">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19 31.6 31.6 0 000 12a31.6 31.6 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.6 31.6 0 0024 12a31.6 31.6 0 00-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-        YouTube Kanal
-      </a>
-      <a href="#ueber" class="btn btn-glass">Mehr erfahren ↓</a>
-    </div>
-  </div>
-  <div class="scroll-ind">
-    <div class="scroll-mouse"></div>
-    <span>Scroll</span>
-  </div>
+  <div class="hero-flag">🇬🇪</div>
+  <p class="hero-greeting">გამარჯობა — Gamarjoba</p>
+  <h1>Auswandern nach<br><span>Georgien</span></h1>
+  <p class="hero-sub">Wir wandern als Familie von Deutschland nach Georgien aus – auf der Suche nach Freiheit, Natur und einem Leben nach unseren Werten. Komm mit auf die Reise.</p>
+  <a href="https://www.youtube.com/@DEIN-KANAL" class="cta-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    Zum YouTube-Kanal
+  </a>
+  <div class="scroll-hint"><span></span></div>
 </section>
 
-<!-- Marquee -->
-<div class="marquee-wrap">
-  <div class="marquee">
-    <div class="marquee-item">Auswandern <span>✦</span></div>
-    <div class="marquee-item">Georgien <span>✦</span></div>
-    <div class="marquee-item">Selbstversorgung <span>✦</span></div>
-    <div class="marquee-item">Familie <span>✦</span></div>
-    <div class="marquee-item">Freiheit <span>✦</span></div>
-    <div class="marquee-item">Tiflis <span>✦</span></div>
-    <div class="marquee-item">Natur <span>✦</span></div>
-    <div class="marquee-item">Alltag <span>✦</span></div>
-    <div class="marquee-item">Auswandern <span>✦</span></div>
-    <div class="marquee-item">Georgien <span>✦</span></div>
-    <div class="marquee-item">Selbstversorgung <span>✦</span></div>
-    <div class="marquee-item">Familie <span>✦</span></div>
-    <div class="marquee-item">Freiheit <span>✦</span></div>
-    <div class="marquee-item">Tiflis <span>✦</span></div>
-    <div class="marquee-item">Natur <span>✦</span></div>
-    <div class="marquee-item">Alltag <span>✦</span></div>
-  </div>
-</div>
-
-<!-- About -->
-<section class="about" id="ueber">
+<!-- ABOUT -->
+<section class="about">
+  <h2 class="section-title reveal">Unsere Geschichte</h2>
+  <p class="section-subtitle reveal">Keine Hochglanz-Auswanderträume — sondern echte Erfahrungen einer deutschen Familie in Georgien.</p>
   <div class="about-grid">
-    <div class="about-text reveal">
-      <p class="section-label">Über mich</p>
-      <h2>Echte Erfahrungen,<br><em>keine Hochglanz-Träume</em></h2>
-      <p>
-        Auf meinem Kanal <strong>„Noah – Leben in Georgien"</strong> zeige ich dir, 
-        wie Auswandern nach Georgien wirklich aussieht: Vom Aufbau eines neuen Lebens 
-        mit eigenem Garten, eigenen Tieren und echtem Essen – bis hin zu den 
-        Herausforderungen im Alltag.
-      </p>
-      <p>
-        Keine Filter, kein Hochglanz – sondern ehrliche Einblicke, hilfreiche Tipps 
-        und alles, was du wissen musst, wenn du auch mit dem Gedanken spielst, 
-        nach Georgien auszuwandern.
-      </p>
+    <div class="about-card reveal">
+      <span class="about-icon">👨‍👩‍👧‍👦</span>
+      <h3>Familie & Werte</h3>
+      <p>Wir gehen als Familie diesen Weg — nach konservativen Werten, mit dem Glauben als Kompass.</p>
     </div>
-    <div class="about-visual reveal reveal-delay-2">
-      <div class="about-card">
-        <div class="card-header">
-          <div class="card-flag">🇬🇪</div>
-          <div>
-            <h3>Noah – Leben in Georgien</h3>
-            <p>@noahhaendel auf YouTube</p>
-          </div>
-        </div>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-val">März '26</div>
-            <div class="stat-label">Auswanderung</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">🏔️</div>
-            <div class="stat-label">Kaukasus</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">👨‍👩‍👧</div>
-            <div class="stat-label">Als Familie</div>
-          </div>
-          <div class="stat">
-            <div class="stat-val">100%</div>
-            <div class="stat-label">Ehrlich & Echt</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Topics -->
-<section class="topics" id="themen">
-  <div class="topics-header reveal">
-    <p class="section-label">Meine Themen</p>
-    <h2>Was dich auf dem Kanal erwartet</h2>
-  </div>
-  <div class="topic-grid">
-    <div class="topic-card reveal reveal-delay-1">
-      <div class="topic-icon">🏠</div>
-      <h3>Haus & Grundstück</h3>
-      <p>Immobilien in Georgien finden, kaufen und einrichten – mit echten Preisen und Erfahrungen.</p>
-    </div>
-    <div class="topic-card reveal reveal-delay-2">
-      <div class="topic-icon">🌱</div>
+    <div class="about-card reveal">
+      <span class="about-icon">🌿</span>
       <h3>Selbstversorgung</h3>
-      <p>Eigener Garten, eigene Tiere und ein nachhaltiges Leben auf dem Land.</p>
+      <p>Eigener Garten, eigene Tiere, echtes Essen. Zurück zu den Wurzeln — selbstbestimmt und naturverbunden.</p>
     </div>
-    <div class="topic-card reveal reveal-delay-3">
-      <div class="topic-icon">📋</div>
-      <h3>Kosten & Bürokratie</h3>
-      <p>Visa, Steuern, Krankenversicherung – was es wirklich kostet und braucht.</p>
-    </div>
-    <div class="topic-card reveal reveal-delay-1">
-      <div class="topic-icon">👨‍👩‍👧</div>
-      <h3>Familie & Alltag</h3>
-      <p>Auswandern mit Kind – Herausforderungen und schöne Momente als Familie.</p>
-    </div>
-    <div class="topic-card reveal reveal-delay-2">
-      <div class="topic-icon">🍷</div>
-      <h3>Küche & Kultur</h3>
-      <p>Khinkali, Khachapuri und die faszinierende georgische Kultur entdecken.</p>
-    </div>
-    <div class="topic-card reveal reveal-delay-3">
-      <div class="topic-icon">💼</div>
-      <h3>Selbstständigkeit</h3>
-      <p>Individual Entrepreneur, Steuern und Chancen für Unternehmer in Georgien.</p>
+    <div class="about-card reveal">
+      <span class="about-icon">🏔️</span>
+      <h3>Neues Leben</h3>
+      <p>Von Tiflis bis aufs Land — wir zeigen dir Grundstücke, Kosten, Bürokratie und den echten Alltag.</p>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-box reveal">
-    <h2>Komm mit auf die Reise 🇬🇪</h2>
-    <p>
-      Abonniere meinen YouTube-Kanal und begleite unsere Familie 
-      in ein neues Leben in Georgien.
-    </p>
-    <div class="hero-cta">
-      <a href="https://www.youtube.com/@noahhaendel?sub_confirmation=1" target="_blank" class="btn btn-primary">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19 31.6 31.6 0 000 12a31.6 31.6 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.6 31.6 0 0024 12a31.6 31.6 0 00-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-        Jetzt abonnieren
-      </a>
-    </div>
+<!-- TOPICS -->
+<section class="topics">
+  <h2 class="section-title reveal">Das erwartet dich</h2>
+  <p class="section-subtitle reveal">Ehrliche Einblicke, praktische Tipps und authentische Erfahrungen aus Georgien.</p>
+  <div class="topics-list reveal">
+    <div class="topic-tag"><span class="tag-icon">🏠</span>Haus & Grundstück</div>
+    <div class="topic-tag"><span class="tag-icon">💰</span>Kosten & Finanzen</div>
+    <div class="topic-tag"><span class="tag-icon">📋</span>Bürokratie & Visum</div>
+    <div class="topic-tag"><span class="tag-icon">🌱</span>Selbstversorgung</div>
+    <div class="topic-tag"><span class="tag-icon">👶</span>Auswandern mit Kindern</div>
+    <div class="topic-tag"><span class="tag-icon">🏙️</span>Leben in Tiflis</div>
+    <div class="topic-tag"><span class="tag-icon">🐓</span>Leben auf dem Land</div>
+    <div class="topic-tag"><span class="tag-icon">💼</span>Selbstständigkeit</div>
+    <div class="topic-tag"><span class="tag-icon">🍷</span>Kultur & Tradition</div>
+    <div class="topic-tag"><span class="tag-icon">☦️</span>Glaube & Werte</div>
   </div>
 </section>
 
+<!-- QUOTE -->
+<section class="quote-section reveal">
+  <p class="quote-text">„Keine Hochglanz-Auswanderträume — sondern echte Erfahrungen."</p>
+  <p class="quote-caption">☦️ In God We Trust ☦️</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="section-title reveal">Bereit für die Reise?</h2>
+  <p class="reveal">Abonniere unseren Kanal und begleite uns auf dem Weg in ein neues Leben in Georgien. Jeder Tipp, jede Erfahrung — für dich.</p>
+  <a href="https://www.youtube.com/@DEIN-KANAL" class="yt-btn reveal" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    Jetzt abonnieren
+  </a>
+  <div class="social-links reveal">
+    <a href="#" title="Instagram">📷</a>
+    <a href="#" title="Telegram">✈️</a>
+    <a href="#" title="E-Mail">✉️</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Noah · <a href="https://www.youtube.com/@noahhaendel" target="_blank">@noahhaendel</a></p>
-  <span class="footer-cross">☦️ 𝐼𝑁 𝐺𝑂𝐷 𝑊𝐸 𝑇𝑅𝑈𝑆𝑇 ☦️</span>
+  <span class="cross">☦️</span>
+  © 2026 — Auswandern nach Georgien · Mit Glaube, Familie & Mut
 </footer>
 
 <script>
-// Particles
-const pc=document.getElementById('particles');
-for(let i=0;i<15;i++){
-  const p=document.createElement('div');
-  p.className='particle';
-  const s=Math.random()*4+2;
-  p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s`;
-  pc.appendChild(p);
-}
-
-// Nav scroll
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>80);
-});
-
-// Reveal
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+
 </body>
 </html>
