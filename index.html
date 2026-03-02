@@ -3,270 +3,483 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah Händel – Leben in Georgien</title>
+<title>Noah – Leben in Georgien</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-
 body{
   font-family:'Inter',sans-serif;
-  background:#0a0a0a;
+  background:#050505;
   color:#e8e8e8;
   overflow-x:hidden;
 }
 
-/* Hero */
-.hero{
-  position:relative;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:
-    linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.0) 30%, rgba(10,10,10,0.0) 60%, rgba(10,10,10,1) 100%),
-    url('https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1920&q=80') center/cover no-repeat;
-  z-index:0;
-}
-.hero-content{
-  position:relative;z-index:1;max-width:800px;padding:2rem;
+/* Grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Profile Image */
-.profile-img-wrap{
-  width:140px;height:140px;
-  border-radius:50%;
-  margin:0 auto 1.5rem;
-  padding:3px;
-  background:linear-gradient(135deg,#ff4444,#ff8888,#ffffff);
-  opacity:0;animation:fadeUp .8s .1s forwards;
+/* Floating particles */
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particle{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,68,68,.4),transparent 70%);
+  animation:float linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{transform:translateY(-10vh) scale(1);opacity:0}
+}
+
+/* Nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(5,5,5,0);
+  backdrop-filter:blur(0px);
+  transition:all .4s ease;
+}
+nav.scrolled{
+  background:rgba(5,5,5,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.nav-logo{
+  font-weight:800;font-size:1.1rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.nav-logo span{color:#ff4444}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:#999;text-decoration:none;font-size:.9rem;font-weight:500;
+  transition:color .3s;position:relative;
+}
+.nav-links a:hover{color:#fff}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:2px;background:#ff4444;transition:width .3s;
+}
+.nav-links a:hover::after{width:100%}
+
+/* Hero */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1920&q=80') center/cover no-repeat;
+  filter:brightness(.4) saturate(1.2);
+  transform:scale(1.1);
+  animation:heroBgZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroBgZoom{
+  0%{transform:scale(1.1) translateY(0)}
+  100%{transform:scale(1.15) translateY(-10px)}
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255,50,50,.08) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(5,5,5,.2) 0%, rgba(5,5,5,0) 40%, rgba(5,5,5,0) 60%, rgba(5,5,5,1) 100%);
+}
+.hero-content{position:relative;z-index:2;max-width:850px;padding:2rem}
+
+/* Profile */
+.profile-wrap{
+  position:relative;width:160px;height:160px;margin:0 auto 2rem;
+  opacity:0;animation:fadeScale .8s .2s forwards;
+}
+.profile-ring{
+  position:absolute;inset:-6px;border-radius:50%;
+  background:conic-gradient(#ff4444,#ff8888,#ffffff,#ff8888,#ff4444);
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.profile-ring-inner{
+  position:absolute;inset:2px;border-radius:50%;background:#050505;
 }
 .profile-img{
-  width:100%;height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid #0a0a0a;
-  display:block;
+  position:relative;z-index:1;
+  width:100%;height:100%;border-radius:50%;
+  object-fit:cover;border:4px solid #050505;display:block;
+}
+.profile-status{
+  position:absolute;bottom:8px;right:8px;z-index:2;
+  width:28px;height:28px;border-radius:50%;
+  background:#050505;display:flex;align-items:center;justify-content:center;
+  font-size:14px;border:2px solid #050505;
 }
 
 .geo-greeting{
   font-family:'Noto Sans Georgian',sans-serif;
-  font-size:1.1rem;color:#ff6b6b;
-  letter-spacing:2px;margin-bottom:0.5rem;
-  opacity:0;animation:fadeUp .8s .2s forwards;
-}
-.hero h1{
-  font-size:clamp(2.5rem,6vw,4.5rem);
-  font-weight:900;line-height:1.1;margin-bottom:1rem;
-  opacity:0;animation:fadeUp .8s .4s forwards;
-}
-.hero h1 span{
-  background:linear-gradient(135deg,#ff4444,#ff6b6b,#ffffff);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-sub{
-  font-size:1.15rem;color:#b0b0b0;line-height:1.7;
-  max-width:600px;margin:0 auto 2rem;
-  opacity:0;animation:fadeUp .8s .6s forwards;
-}
-.flag-badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:50px;padding:.6rem 1.4rem;
-  font-size:.95rem;font-weight:500;margin-bottom:1.5rem;
+  font-size:1rem;color:rgba(255,107,107,.8);
+  letter-spacing:3px;margin-bottom:.8rem;
   opacity:0;animation:fadeUp .8s .3s forwards;
 }
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,7vw,5.5rem);
+  font-weight:900;line-height:1.05;margin-bottom:.5rem;
+  opacity:0;animation:fadeUp .8s .5s forwards;
+}
+.hero h1 .highlight{
+  position:relative;display:inline-block;
+}
+.hero h1 .highlight::after{
+  content:'';position:absolute;bottom:.05em;left:-.02em;right:-.02em;
+  height:.35em;background:rgba(255,68,68,.25);
+  border-radius:4px;z-index:-1;
+  transform:skewX(-3deg);
+}
+.hero-subtitle{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.2rem,3vw,1.8rem);
+  font-weight:400;font-style:italic;
+  color:rgba(255,255,255,.5);margin-bottom:1.8rem;
+  opacity:0;animation:fadeUp .8s .65s forwards;
+}
+.hero-desc{
+  font-size:1.05rem;color:#999;line-height:1.8;
+  max-width:580px;margin:0 auto 2.5rem;
+  opacity:0;animation:fadeUp .8s .8s forwards;
+}
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;
+  margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .8s .7s forwards;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.06);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50px;padding:.45rem 1rem;
+  font-size:.82rem;color:#bbb;font-weight:500;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#ff4444;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
 .hero-cta{
   display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
-  opacity:0;animation:fadeUp .8s .8s forwards;
+  opacity:0;animation:fadeUp .8s .95s forwards;
 }
 .btn{
   display:inline-flex;align-items:center;gap:.6rem;
-  padding:.9rem 2rem;border-radius:12px;
-  font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;
-  text-decoration:none;transition:all .3s ease;cursor:pointer;border:none;
+  padding:1rem 2.2rem;border-radius:14px;
+  font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;
+  text-decoration:none;transition:all .35s cubic-bezier(.4,0,.2,1);
+  cursor:pointer;border:none;position:relative;overflow:hidden;
 }
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.btn:hover::before{opacity:1}
 .btn-primary{
-  background:#ff4444;color:#fff;
-  box-shadow:0 4px 24px rgba(255,68,68,0.3);
+  background:linear-gradient(135deg,#ff4444,#cc2222);color:#fff;
+  box-shadow:0 4px 30px rgba(255,68,68,.3);
 }
 .btn-primary:hover{
-  background:#ff5555;transform:translateY(-2px);
-  box-shadow:0 8px 32px rgba(255,68,68,0.4);
+  transform:translateY(-3px);
+  box-shadow:0 8px 40px rgba(255,68,68,.45);
 }
-.btn-outline{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.15);color:#fff;
+.btn-glass{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);color:#fff;
+  backdrop-filter:blur(10px);
 }
-.btn-outline:hover{
-  background:rgba(255,255,255,0.12);transform:translateY(-2px);
+.btn-glass:hover{
+  background:rgba(255,255,255,.12);transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(255,255,255,.05);
 }
 .btn svg{width:20px;height:20px;fill:currentColor}
 
-.scroll-hint{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  z-index:1;opacity:0;animation:fadeUp .8s 1.2s forwards;
+/* Scroll indicator */
+.scroll-ind{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  z-index:2;opacity:0;animation:fadeUp .8s 1.4s forwards;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
 }
-.scroll-hint span{
-  display:block;width:2px;height:40px;
-  background:linear-gradient(180deg,#ff4444,transparent);
-  margin:0 auto;animation:scrollPulse 2s infinite;
+.scroll-ind span{font-size:.7rem;letter-spacing:2px;color:#555;text-transform:uppercase}
+.scroll-mouse{
+  width:22px;height:34px;border:2px solid #444;border-radius:11px;
+  position:relative;
 }
+.scroll-mouse::after{
+  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:3px;height:8px;background:#ff4444;border-radius:2px;
+  animation:scrollDot 2s infinite;
+}
+@keyframes scrollDot{0%,100%{opacity:1;transform:translateX(-50%) translateY(0)}50%{opacity:.3;transform:translateX(-50%) translateY(10px)}}
 
-/* About */
-.about{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+/* Sections shared */
+section{position:relative;z-index:1}
 .section-label{
-  font-size:.8rem;font-weight:700;letter-spacing:3px;
+  font-size:.75rem;font-weight:700;letter-spacing:4px;
   text-transform:uppercase;color:#ff6b6b;margin-bottom:1rem;
 }
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+
+/* Marquee */
+.marquee-wrap{
+  padding:3rem 0;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.04);
 }
+.marquee{
+  display:flex;gap:3rem;
+  animation:marquee 25s linear infinite;
+  width:max-content;
+}
+.marquee-item{
+  font-size:clamp(1rem,2vw,1.3rem);font-weight:700;
+  color:rgba(255,255,255,.08);white-space:nowrap;
+  display:flex;align-items:center;gap:1rem;
+}
+.marquee-item span{color:rgba(255,68,68,.3);font-size:.8em}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* About */
+.about{padding:7rem 2rem;max-width:1100px;margin:0 auto}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .about-text h2{
-  font-size:clamp(1.8rem,3.5vw,2.8rem);
-  font-weight:800;line-height:1.2;margin-bottom:1.5rem;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;line-height:1.15;margin-bottom:1.5rem;
 }
-.about-text p{color:#a0a0a0;line-height:1.8;margin-bottom:1.2rem;font-size:1.05rem}
-.about-text p strong{color:#e0e0e0}
+.about-text h2 em{font-style:italic;color:#ff6b6b}
+.about-text p{color:#888;line-height:1.85;margin-bottom:1.2rem;font-size:1.02rem}
+.about-text p strong{color:#ccc}
+
 .about-card{
-  background:linear-gradient(135deg,rgba(255,68,68,0.08),rgba(255,255,255,0.03));
-  border:1px solid rgba(255,68,68,0.15);
-  border-radius:24px;padding:2.5rem;backdrop-filter:blur(10px);
+  background:linear-gradient(145deg,rgba(255,68,68,.06),rgba(255,255,255,.02));
+  border:1px solid rgba(255,68,68,.1);
+  border-radius:28px;padding:2.5rem;
+  position:relative;overflow:hidden;
 }
-.about-card .emoji-row{font-size:2rem;margin-bottom:1.5rem;display:flex;gap:.8rem}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.about-card::before{
+  content:'';position:absolute;top:-40%;right:-40%;
+  width:250px;height:250px;
+  background:radial-gradient(circle,rgba(255,68,68,.12),transparent 70%);
+  border-radius:50%;
+}
+.card-header{
+  display:flex;align-items:center;gap:1rem;margin-bottom:2rem;
+  position:relative;
+}
+.card-flag{font-size:2.8rem}
+.card-header div h3{font-size:1.1rem;font-weight:700}
+.card-header div p{font-size:.85rem;color:#666}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative}
 .stat{
-  background:rgba(255,255,255,0.04);border-radius:14px;padding:1.2rem;text-align:center;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);
+  border-radius:16px;padding:1.3rem;text-align:center;
+  transition:all .3s;
 }
+.stat:hover{background:rgba(255,68,68,.06);border-color:rgba(255,68,68,.15)}
 .stat-val{
-  font-size:1.6rem;font-weight:800;
+  font-size:1.5rem;font-weight:800;
   background:linear-gradient(135deg,#ff4444,#ff8888);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.stat-label{font-size:.8rem;color:#888;margin-top:.3rem}
+.stat-label{font-size:.78rem;color:#666;margin-top:.3rem;letter-spacing:.5px}
 
 /* Topics */
-.topics{padding:4rem 2rem 6rem;max-width:1100px;margin:0 auto}
-.topics h2{
-  font-size:clamp(1.8rem,3.5vw,2.5rem);
-  font-weight:800;margin-bottom:3rem;text-align:center;
+.topics{padding:4rem 2rem 7rem;max-width:1200px;margin:0 auto}
+.topics-header{text-align:center;margin-bottom:3.5rem}
+.topics-header h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,2.8rem);font-weight:900;
 }
-.topic-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;
-}
+.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
 .topic-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:20px;padding:2rem;transition:all .3s ease;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:22px;padding:2rem 1.8rem;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+}
+.topic-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 0%,rgba(255,68,68,.08),transparent 60%);
+  opacity:0;transition:opacity .4s;
 }
 .topic-card:hover{
-  background:rgba(255,68,68,0.05);
-  border-color:rgba(255,68,68,0.2);transform:translateY(-4px);
+  transform:translateY(-6px);
+  border-color:rgba(255,68,68,.2);
+  box-shadow:0 20px 60px rgba(255,68,68,.08);
 }
+.topic-card:hover::before{opacity:1}
 .topic-icon{
-  font-size:2.2rem;margin-bottom:1rem;width:60px;height:60px;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(255,68,68,0.1);border-radius:16px;
+  font-size:1.8rem;margin-bottom:1.2rem;
+  width:56px;height:56px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,68,68,.08);border-radius:16px;
+  border:1px solid rgba(255,68,68,.1);
+  position:relative;
 }
-.topic-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
-.topic-card p{color:#888;font-size:.92rem;line-height:1.6}
+.topic-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;position:relative}
+.topic-card p{color:#666;font-size:.88rem;line-height:1.65;position:relative}
 
 /* CTA */
-.cta-section{padding:4rem 2rem 8rem;text-align:center}
+.cta-section{padding:3rem 2rem 8rem;text-align:center}
 .cta-box{
-  max-width:700px;margin:0 auto;
-  background:linear-gradient(135deg,rgba(255,68,68,0.12),rgba(255,68,68,0.03));
-  border:1px solid rgba(255,68,68,0.2);
-  border-radius:28px;padding:3.5rem 2.5rem;
+  max-width:750px;margin:0 auto;
+  background:linear-gradient(145deg,rgba(255,68,68,.1),rgba(255,68,68,.02));
+  border:1px solid rgba(255,68,68,.15);
+  border-radius:32px;padding:4rem 3rem;
   position:relative;overflow:hidden;
 }
 .cta-box::before{
-  content:'';position:absolute;top:-50%;right:-30%;
+  content:'';position:absolute;top:-60%;right:-20%;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(255,68,68,.12),transparent 60%);
+  border-radius:50%;
+}
+.cta-box::after{
+  content:'';position:absolute;bottom:-40%;left:-20%;
   width:300px;height:300px;
-  background:radial-gradient(circle,rgba(255,68,68,0.15),transparent 70%);
+  background:radial-gradient(circle,rgba(255,100,100,.06),transparent 60%);
   border-radius:50%;
 }
 .cta-box h2{
-  font-size:clamp(1.6rem,3vw,2.2rem);
-  font-weight:800;margin-bottom:1rem;position:relative;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.5vw,2.5rem);
+  font-weight:900;margin-bottom:1rem;position:relative;
 }
 .cta-box p{
-  color:#a0a0a0;margin-bottom:2rem;font-size:1.05rem;line-height:1.7;position:relative;
+  color:#888;margin-bottom:2.5rem;font-size:1.05rem;line-height:1.75;
+  max-width:500px;margin-left:auto;margin-right:auto;position:relative;
 }
 .cta-box .hero-cta{position:relative}
 
+/* Footer */
 footer{
-  text-align:center;padding:2rem;
-  border-top:1px solid rgba(255,255,255,0.05);
-  color:#555;font-size:.85rem;
+  text-align:center;padding:2.5rem 2rem;
+  border-top:1px solid rgba(255,255,255,.04);
 }
-footer a{color:#ff6b6b;text-decoration:none}
+footer p{color:#444;font-size:.82rem;letter-spacing:.5px}
+footer a{color:#ff6b6b;text-decoration:none;transition:color .3s}
+footer a:hover{color:#ff8888}
+.footer-cross{color:#666;margin-top:.6rem;font-size:.85rem;display:block}
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(24px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes scrollPulse{
-  0%,100%{opacity:.3;transform:scaleY(1)}
-  50%{opacity:1;transform:scaleY(1.3)}
-}
-.reveal{opacity:0;transform:translateY(30px);transition:all .7s ease}
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeScale{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.reveal{opacity:0;transform:translateY(35px);transition:all .8s cubic-bezier(.4,0,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
 
+/* Responsive */
+@media(max-width:900px){
+  .topic-grid{grid-template-columns:1fr 1fr}
+}
 @media(max-width:768px){
-  .about-grid{grid-template-columns:1fr;gap:2.5rem}
-  .cta-box{padding:2.5rem 1.5rem}
-  .profile-img-wrap{width:120px;height:120px}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .topic-grid{grid-template-columns:1fr}
+  .cta-box{padding:3rem 1.5rem}
+  .profile-wrap{width:130px;height:130px}
+  .nav-links{display:none}
+  nav{padding:1rem 1.5rem}
 }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-logo">🇬🇪 <span>Noah</span></div>
+  <ul class="nav-links">
+    <li><a href="#ueber">Über mich</a></li>
+    <li><a href="#themen">Themen</a></li>
+    <li><a href="https://www.youtube.com/@noahhaendel" target="_blank">YouTube</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
 <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="profile-img-wrap">
-      <!-- 
-        ANLEITUNG: Speichere dein Foto als "noah.jpg" im selben Ordner wie diese HTML-Datei.
-        Falls dein Bild anders heißt, ändere einfach den Dateinamen unten.
-      -->
-      <img src="noah.jpg" alt="Noah Händel" class="profile-img"
-           onerror="this.parentElement.innerHTML='<div style=&quot;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#ff4444,#cc2222);display:flex;align-items:center;justify-content:center;font-size:3rem;font-weight:800;color:#fff;border:3px solid #0a0a0a&quot;>N</div>'">
+    <div class="profile-wrap">
+      <div class="profile-ring"><div class="profile-ring-inner"></div></div>
+      <img src="noah.jpg" alt="Noah" class="profile-img"
+           onerror="this.style.display='none';this.parentElement.querySelector('.profile-ring').style.display='none';this.parentElement.innerHTML+='<div style=&quot;position:relative;z-index:1;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#ff4444,#cc2222);display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:3.5rem;font-weight:900;color:#fff&quot;>N</div>'">
+      <div class="profile-status">🇬🇪</div>
     </div>
-    <div class="flag-badge">
-      <span>🇬🇪</span> Deutschland → Georgien
+
+    <div class="hero-badges">
+      <div class="badge"><div class="badge-dot"></div> Auswanderer</div>
+      <div class="badge">🏔️ Georgien</div>
+      <div class="badge">👨‍👩‍👧 Familie</div>
+      <div class="badge">☦️ Glaube</div>
     </div>
+
     <p class="geo-greeting">გამარჯობა – Gamarjoba!</p>
-    <h1>Ich bin <span>Noah Händel</span></h1>
-    <p class="hero-sub">
+    <h1>Ich bin <span class="highlight">Noah</span></h1>
+    <p class="hero-subtitle">Leben in Georgien</p>
+    <p class="hero-desc">
       Wir wandern im März 2026 als Familie von Deutschland nach Georgien aus – 
-      auf der Suche nach mehr Freiheit, Natur und einem Leben nach konservativen Werten.
+      auf der Suche nach mehr Freiheit, Natur und einem selbstbestimmten Leben.
     </p>
     <div class="hero-cta">
       <a href="https://www.youtube.com/@noahhaendel" target="_blank" class="btn btn-primary">
         <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19 31.6 31.6 0 000 12a31.6 31.6 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.6 31.6 0 0024 12a31.6 31.6 0 00-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
         YouTube Kanal
       </a>
-      <a href="#ueber" class="btn btn-outline">Mehr erfahren ↓</a>
+      <a href="#ueber" class="btn btn-glass">Mehr erfahren ↓</a>
     </div>
   </div>
-  <div class="scroll-hint"><span></span></div>
+  <div class="scroll-ind">
+    <div class="scroll-mouse"></div>
+    <span>Scroll</span>
+  </div>
 </section>
 
-<!-- ABOUT -->
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <div class="marquee-item">Auswandern <span>✦</span></div>
+    <div class="marquee-item">Georgien <span>✦</span></div>
+    <div class="marquee-item">Selbstversorgung <span>✦</span></div>
+    <div class="marquee-item">Familie <span>✦</span></div>
+    <div class="marquee-item">Freiheit <span>✦</span></div>
+    <div class="marquee-item">Tiflis <span>✦</span></div>
+    <div class="marquee-item">Natur <span>✦</span></div>
+    <div class="marquee-item">Alltag <span>✦</span></div>
+    <div class="marquee-item">Auswandern <span>✦</span></div>
+    <div class="marquee-item">Georgien <span>✦</span></div>
+    <div class="marquee-item">Selbstversorgung <span>✦</span></div>
+    <div class="marquee-item">Familie <span>✦</span></div>
+    <div class="marquee-item">Freiheit <span>✦</span></div>
+    <div class="marquee-item">Tiflis <span>✦</span></div>
+    <div class="marquee-item">Natur <span>✦</span></div>
+    <div class="marquee-item">Alltag <span>✦</span></div>
+  </div>
+</div>
+
+<!-- About -->
 <section class="about" id="ueber">
   <div class="about-grid">
     <div class="about-text reveal">
       <p class="section-label">Über mich</p>
-      <h2>Echte Erfahrungen statt Hochglanz-Auswanderträume</h2>
+      <h2>Echte Erfahrungen,<br><em>keine Hochglanz-Träume</em></h2>
       <p>
         Auf meinem Kanal <strong>„Noah – Leben in Georgien"</strong> zeige ich dir, 
         wie Auswandern nach Georgien wirklich aussieht: Vom Aufbau eines neuen Lebens 
@@ -279,21 +492,27 @@ footer a{color:#ff6b6b;text-decoration:none}
         nach Georgien auszuwandern.
       </p>
     </div>
-    <div class="about-visual reveal">
+    <div class="about-visual reveal reveal-delay-2">
       <div class="about-card">
-        <div class="emoji-row">🏔️ 🏡 🌿 ☦️</div>
+        <div class="card-header">
+          <div class="card-flag">🇬🇪</div>
+          <div>
+            <h3>Noah – Leben in Georgien</h3>
+            <p>@noahhaendel auf YouTube</p>
+          </div>
+        </div>
         <div class="stat-grid">
           <div class="stat">
-            <div class="stat-val">2026</div>
+            <div class="stat-val">März '26</div>
             <div class="stat-label">Auswanderung</div>
           </div>
           <div class="stat">
-            <div class="stat-val">🇬🇪</div>
-            <div class="stat-label">Neues Zuhause</div>
+            <div class="stat-val">🏔️</div>
+            <div class="stat-label">Kaukasus</div>
           </div>
           <div class="stat">
-            <div class="stat-val">Familie</div>
-            <div class="stat-label">Gemeinsam</div>
+            <div class="stat-val">👨‍👩‍👧</div>
+            <div class="stat-label">Als Familie</div>
           </div>
           <div class="stat">
             <div class="stat-val">100%</div>
@@ -305,42 +524,42 @@ footer a{color:#ff6b6b;text-decoration:none}
   </div>
 </section>
 
-<!-- TOPICS -->
-<section class="topics">
-  <div class="reveal">
-    <p class="section-label" style="text-align:center">Meine Themen</p>
+<!-- Topics -->
+<section class="topics" id="themen">
+  <div class="topics-header reveal">
+    <p class="section-label">Meine Themen</p>
     <h2>Was dich auf dem Kanal erwartet</h2>
   </div>
   <div class="topic-grid">
-    <div class="topic-card reveal">
+    <div class="topic-card reveal reveal-delay-1">
       <div class="topic-icon">🏠</div>
       <h3>Haus & Grundstück</h3>
-      <p>Immobilien in Georgien finden, kaufen und einrichten – mit realistischen Preisen und echten Erfahrungen.</p>
+      <p>Immobilien in Georgien finden, kaufen und einrichten – mit echten Preisen und Erfahrungen.</p>
     </div>
-    <div class="topic-card reveal">
+    <div class="topic-card reveal reveal-delay-2">
       <div class="topic-icon">🌱</div>
       <h3>Selbstversorgung</h3>
-      <p>Eigener Garten, eigene Tiere und ein nachhaltiges Leben auf dem Land in Georgien.</p>
+      <p>Eigener Garten, eigene Tiere und ein nachhaltiges Leben auf dem Land.</p>
     </div>
-    <div class="topic-card reveal">
+    <div class="topic-card reveal reveal-delay-3">
       <div class="topic-icon">📋</div>
       <h3>Kosten & Bürokratie</h3>
-      <p>Was kostet das Leben in Georgien? Visa, Steuern, Krankenversicherung und alles Wichtige.</p>
+      <p>Visa, Steuern, Krankenversicherung – was es wirklich kostet und braucht.</p>
     </div>
-    <div class="topic-card reveal">
+    <div class="topic-card reveal reveal-delay-1">
       <div class="topic-icon">👨‍👩‍👧</div>
-      <h3>Auswandern mit Familie</h3>
-      <p>Die besonderen Herausforderungen und Freuden, wenn man als Familie den Schritt wagt.</p>
+      <h3>Familie & Alltag</h3>
+      <p>Auswandern mit Kind – Herausforderungen und schöne Momente als Familie.</p>
     </div>
-    <div class="topic-card reveal">
+    <div class="topic-card reveal reveal-delay-2">
       <div class="topic-icon">🍷</div>
-      <h3>Georgische Küche & Kultur</h3>
-      <p>Khinkali, Khachapuri und vieles mehr – die faszinierende georgische Esskultur entdecken.</p>
+      <h3>Küche & Kultur</h3>
+      <p>Khinkali, Khachapuri und die faszinierende georgische Kultur entdecken.</p>
     </div>
-    <div class="topic-card reveal">
+    <div class="topic-card reveal reveal-delay-3">
       <div class="topic-icon">💼</div>
       <h3>Selbstständigkeit</h3>
-      <p>Individual Entrepreneur, Firmengründung und Chancen für Unternehmer in Georgien.</p>
+      <p>Individual Entrepreneur, Steuern und Chancen für Unternehmer in Georgien.</p>
     </div>
   </div>
 </section>
@@ -348,10 +567,10 @@ footer a{color:#ff6b6b;text-decoration:none}
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-box reveal">
-    <h2>Komm mit auf die Reise! 🇬🇪</h2>
+    <h2>Komm mit auf die Reise 🇬🇪</h2>
     <p>
-      Abonniere meinen YouTube-Kanal und begleite unsere Familie auf dem Weg 
-      in ein neues Leben in Georgien. Jede Menge Tipps, Tricks und ehrliche Einblicke warten auf dich.
+      Abonniere meinen YouTube-Kanal und begleite unsere Familie 
+      in ein neues Leben in Georgien.
     </p>
     <div class="hero-cta">
       <a href="https://www.youtube.com/@noahhaendel?sub_confirmation=1" target="_blank" class="btn btn-primary">
@@ -363,14 +582,32 @@ footer a{color:#ff6b6b;text-decoration:none}
 </section>
 
 <footer>
-  <p>© 2026 Noah Händel · <a href="https://www.youtube.com/@noahhaendel" target="_blank">@noahhaendel</a> · ☦️ 𝐼𝑁 𝐺𝑂𝐷 𝑊𝐸 𝑇𝑅𝑈𝑆𝑇 ☦️</p>
+  <p>© 2026 Noah · <a href="https://www.youtube.com/@noahhaendel" target="_blank">@noahhaendel</a></p>
+  <span class="footer-cross">☦️ 𝐼𝑁 𝐺𝑂𝐷 𝑊𝐸 𝑇𝑅𝑈𝑆𝑇 ☦️</span>
 </footer>
 
 <script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// Particles
+const pc=document.getElementById('particles');
+for(let i=0;i<15;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  const s=Math.random()*4+2;
+  p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s`;
+  pc.appendChild(p);
+}
+
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>80);
+});
+
+// Reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
