@@ -1,513 +1,928 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah - Leben in Georgien 🇬🇪</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeorgianDream – Auswandern nach Georgien · Von Noah</title>
+  <meta name="description" content="Ungefilterte Einblicke für alle, die ernsthaft nach Georgien auswandern wollen. Von Noah – ehrlich, direkt, persönlich.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 
-  :root {
-    --wine: #722F37;
-    --gold: #D4A843;
-    --cream: #FDF6EC;
-    --dark: #1A1A1A;
-    --forest: #2D5016;
-    --sky: #E8F0F2;
-  }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+    :root {
+      --accent:       #4A7C59;
+      --accent-lite:  #6AAF80;
+      --brown:        #8B5C3E;
+      --brown-lite:   #B07850;
+      --bg1:          #0E0C0A;
+      --bg2:          #161310;
+      --bg3:          #1E1A15;
+      --text:         #EDE8E0;
+      --muted:        #7A7168;
+      --line:         rgba(255,255,255,0.06);
+      --glow:         rgba(74,124,89,0.25);
+    }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--dark);
-    color: #fff;
-    overflow-x: hidden;
-  }
+    html { scroll-behavior: smooth; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    background:
-      linear-gradient(135deg, rgba(26,26,26,0.55) 0%, rgba(45,80,22,0.45) 50%, rgba(114,47,55,0.5) 100%),
-      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"><defs><linearGradient id="g" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" stop-color="%232D5016"/><stop offset="50%25" stop-color="%234A7C2E"/><stop offset="100%25" stop-color="%23722F37"/></linearGradient></defs><rect fill="url(%23g)" width="1440" height="900"/><g opacity="0.15"><circle cx="200" cy="300" r="180" fill="%23D4A843"/><circle cx="1200" cy="600" r="250" fill="%23D4A843"/><circle cx="700" cy="150" r="100" fill="%23fff"/></g></svg>') center/cover no-repeat;
-    padding: 2rem;
-  }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg1);
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(212,168,67,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(14,12,10,0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+    }
 
-  .hero-flag {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: float 3s ease-in-out infinite;
-  }
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-logo strong { font-weight: 600; color: var(--accent-lite); }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
 
-  .hero-greeting {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: var(--gold);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
-  }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--text) !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      transition: background .2s, transform .2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--accent-lite) !important;
+      color: #0E0C0A !important;
+      transform: translateY(-1px);
+    }
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 6vw, 4.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.5s forwards;
-  }
+    /* ─── HERO ────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 100px;
+      overflow: hidden;
+    }
 
-  .hero h1 span {
-    background: linear-gradient(135deg, var(--gold), #F0D68A, var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    #crossGrid {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
 
-  .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    font-weight: 300;
-    color: rgba(255,255,255,0.85);
-    max-width: 600px;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.7s forwards;
-  }
+    /* noise overlay */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      opacity: 1;
+    }
 
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 18px 42px;
-    background: linear-gradient(135deg, #FF0000, #CC0000);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    border-radius: 60px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 32px rgba(255,0,0,0.3);
-    opacity: 0;
-    animation: fadeUp 1s ease 0.9s forwards;
-  }
+    .orbs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .orb  { position: absolute; border-radius: 50%; filter: blur(90px); }
+    .orb-1 {
+      width: 520px; height: 520px;
+      background: rgba(74,124,89,0.14);
+      top: -120px; right: -80px;
+      animation: drift1 22s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 360px; height: 360px;
+      background: rgba(139,92,62,0.11);
+      bottom: -40px; left: 60px;
+      animation: drift2 28s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 280px; height: 280px;
+      background: rgba(74,124,89,0.08);
+      top: 40%; left: 45%;
+      animation: drift3 18s ease-in-out infinite;
+    }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(40px,-30px)} 66%{transform:translate(-20px,45px)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-35px,-25px)} 66%{transform:translate(50px,20px)} }
+    @keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-45px,-40px)} }
 
-  .cta-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 48px rgba(255,0,0,0.45);
-  }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 740px;
+    }
 
-  .cta-btn svg { width: 28px; height: 28px; fill: #fff; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--accent-lite);
+      margin-bottom: 28px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--accent-lite);
+    }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 1.2s forwards;
-  }
+    h1 {
+      font-size: clamp(42px, 6.5vw, 80px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -2.5px;
+      margin-bottom: 28px;
+    }
+    h1 strong { font-weight: 600; }
 
-  .scroll-hint span {
-    display: block;
-    width: 2px;
-    height: 40px;
-    background: var(--gold);
-    margin: 0 auto;
-    animation: scrollPulse 2s ease-in-out infinite;
-    border-radius: 2px;
-  }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
 
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-lite);
+      color: #0E0C0A;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px var(--glow);
+    }
 
-  /* SECTIONS */
-  section {
-    padding: 5rem 2rem;
-  }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.14);
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent-lite);
+      color: var(--accent-lite);
+      background: rgba(74,124,89,0.07);
+    }
 
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    text-align: center;
-    margin-bottom: 1rem;
-  }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 48px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-lite);
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--accent-lite), transparent);
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: .3; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.6); }
+    }
 
-  .section-subtitle {
-    text-align: center;
-    color: rgba(255,255,255,0.6);
-    font-weight: 300;
-    max-width: 550px;
-    margin: 0 auto 3.5rem;
-    line-height: 1.6;
-  }
+    /* ─── MARQUEE ─────────────────────────────────────────── */
+    .marquee-wrap {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      padding: 13px 0;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .marquee-item::after {
+      content: '·';
+      color: var(--accent);
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
-  /* ABOUT */
-  .about {
-    background: linear-gradient(180deg, var(--dark) 0%, #0F1A0A 100%);
-    position: relative;
-    overflow: hidden;
-  }
+    /* ─── FACTS ───────────────────────────────────────────── */
+    #facts {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+    }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .fact-item {
+      padding: 44px 36px;
+      border-right: 1px solid var(--line);
+    }
+    .fact-item:last-child { border-right: none; }
+    .fact-number {
+      display: block;
+      font-size: 38px;
+      font-weight: 300;
+      color: var(--accent-lite);
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .fact-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted);
+    }
 
-  .about::before {
-    content: '☦️';
-    position: absolute;
-    font-size: 20rem;
-    opacity: 0.03;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
+    /* ─── SHARED SECTION ──────────────────────────────────── */
+    section { padding: 100px 48px; }
 
-  .about-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--accent-lite);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    h2 strong { font-weight: 600; }
+    .section-sub {
+      margin-top: 16px;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+    }
 
-  .about-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(212,168,67,0.15);
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
-    text-align: center;
-    transition: all 0.4s ease;
-    backdrop-filter: blur(10px);
-  }
+    /* ─── THEMEN ──────────────────────────────────────────── */
+    #themen { background: var(--bg1); }
 
-  .about-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(212,168,67,0.4);
-    background: rgba(255,255,255,0.07);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
+    .section-header { margin-bottom: 56px; }
 
-  .about-icon {
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
+    .themen-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-left: 1px solid var(--line);
+      border-top:  1px solid var(--line);
+    }
+    .thema-card {
+      padding: 36px 32px;
+      border-right:  1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--bg2);
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: background .25s, box-shadow .25s;
+    }
+    .thema-card:hover {
+      background: var(--bg3);
+      box-shadow: inset 0 0 50px rgba(74,124,89,0.09),
+                  inset 0 0 0 1px rgba(106,175,128,0.18);
+    }
+    .thema-emoji {
+      font-size: 28px;
+      display: block;
+      margin-bottom: 18px;
+    }
+    .thema-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .thema-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .thema-arrow {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 18px;
+      color: var(--accent-lite);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity .25s, transform .25s;
+    }
+    .thema-card:hover .thema-arrow { opacity: 1; transform: translateX(0); }
 
-  .about-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
+    /* ─── RESSOURCE ───────────────────────────────────────── */
+    #ressource { background: var(--bg2); }
 
-  .about-card p {
-    font-weight: 300;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.6;
-  }
+    .ressource-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .ressource-badge {
+      display: inline-block;
+      background: rgba(74,124,89,0.14);
+      color: var(--accent-lite);
+      border: 1px solid rgba(106,175,128,0.22);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 24px;
+    }
+    h3 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    h3 strong { font-weight: 600; }
+    .ressource-text {
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+    .btn-note {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-  /* TOPICS */
-  .topics {
-    background: linear-gradient(180deg, #0F1A0A 0%, #1A0F10 100%);
-  }
+    .ressource-visual {
+      background: var(--bg3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ressource-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 20%, rgba(74,124,89,0.12), transparent 60%);
+      pointer-events: none;
+    }
+    .checklist { list-style: none; position: relative; z-index: 1; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--text);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '✓';
+      color: var(--accent-lite);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
 
-  .topics-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    max-width: 800px;
-    margin: 0 auto 3rem;
-  }
+    /* ─── ÜBER NOAH ───────────────────────────────────────── */
+    #ueber { background: var(--bg1); }
 
-  .topic-tag {
-    padding: 12px 24px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(212,168,67,0.2);
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: rgba(255,255,255,0.85);
-    transition: all 0.3s ease;
-    cursor: default;
-  }
+    .ueber-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .noah-visual {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .noah-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 35%, rgba(74,124,89,0.18), transparent 65%);
+    }
+    .noah-placeholder {
+      font-size: 72px;
+      opacity: .25;
+      position: relative;
+      z-index: 1;
+    }
+    .noah-hint {
+      position: absolute;
+      bottom: 20px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      z-index: 1;
+    }
 
-  .topic-tag:hover {
-    background: rgba(212,168,67,0.15);
-    border-color: var(--gold);
-    color: var(--gold);
-    transform: scale(1.05);
-  }
+    .ueber-content { padding-top: 4px; }
+    .ueber-text {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .ueber-text p + p { margin-top: 14px; }
 
-  .topic-tag .tag-icon { margin-right: 6px; }
+    .noah-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 32px 0;
+    }
+    .noah-tag {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-  /* QUOTE */
-  .quote-section {
-    background: linear-gradient(135deg, var(--wine), #4A1520);
-    text-align: center;
-    padding: 5rem 2rem;
-    position: relative;
-  }
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-logo strong { color: var(--accent-lite); font-weight: 600; }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--text); }
 
-  .quote-section::before,
-  .quote-section::after {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 2px;
-    background: var(--gold);
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .quote-section::before { top: 3rem; }
-  .quote-section::after { bottom: 3rem; }
+    /* ─── ANIMATION ───────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .quote-text {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 3vw, 2rem);
-    font-style: italic;
-    color: var(--cream);
-    max-width: 650px;
-    margin: 0 auto 1.5rem;
-    line-height: 1.5;
-  }
-
-  .quote-caption {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  /* CTA FINAL */
-  .final-cta {
-    background: linear-gradient(180deg, #1A0F10 0%, var(--dark) 100%);
-    text-align: center;
-    padding: 6rem 2rem;
-  }
-
-  .final-cta .section-title {
-    margin-bottom: 1.5rem;
-  }
-
-  .final-cta p {
-    color: rgba(255,255,255,0.6);
-    max-width: 500px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .yt-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 20px 48px;
-    background: #FF0000;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.15rem;
-    border-radius: 60px;
-    transition: all 0.4s ease;
-    box-shadow: 0 8px 40px rgba(255,0,0,0.25);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .yt-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15), transparent);
-    transform: translateX(-100%);
-    transition: 0.6s;
-  }
-
-  .yt-btn:hover::before { transform: translateX(100%); }
-
-  .yt-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 56px rgba(255,0,0,0.4);
-  }
-
-  .yt-btn svg { width: 30px; height: 30px; fill: #fff; }
-
-  .social-links {
-    margin-top: 2.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .social-links a {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-  }
-
-  .social-links a:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    transform: scale(1.1);
-  }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.3);
-  }
-
-  footer .cross { color: var(--gold); font-size: 1rem; display: block; margin-bottom: 0.5rem; }
-
-  /* ANIMATIONS ON SCROLL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* MOBILE */
-  @media (max-width: 600px) {
-    .about-grid { grid-template-columns: 1fr; }
-    section { padding: 3.5rem 1.5rem; }
-    .cta-btn, .yt-btn { padding: 16px 32px; font-size: 1rem; }
-  }
-</style>
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links li:not(:last-child) { display: none; }
+      #hero    { padding: 100px 24px 80px; }
+      section  { padding: 72px 24px; }
+      footer   { padding: 28px 24px; flex-direction: column; text-align: center; }
+      .scroll-indicator { left: 24px; }
+      .facts-grid { grid-template-columns: 1fr 1fr; }
+      .fact-item:nth-child(2) { border-right: none; }
+      .fact-item:nth-child(3) { border-right: 1px solid var(--line); }
+      .ressource-inner,
+      .ueber-inner   { grid-template-columns: 1fr; gap: 40px; }
+      .ueber-inner   { direction: ltr; }
+    }
+    @media (max-width: 640px) {
+      h1 { letter-spacing: -1.5px; }
+      .themen-grid { grid-template-columns: 1fr; }
+      .facts-grid  { grid-template-columns: 1fr 1fr; }
+      .fact-item:nth-child(3) { border-right: none; }
+    }
+    @media (max-width: 640px) {
+      .themen-grid { border-left: none; border-top: none; }
+      .thema-card  { border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-flag">🇬🇪</div>
-  <p class="hero-greeting">გამარჯობა — Gamarjoba</p>
-  <h1>Noah -<br><span>Leben in Georgien</span></h1>
-  <p class="hero-sub">Wir wandern als Familie von Deutschland nach Georgien aus – auf der Suche nach Freiheit, Natur und einem Leben nach unseren Werten. Komm mit auf die Reise.</p>
-  <a href="https://www.youtube.com/@noahhaendel" class="cta-btn" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-    Zum YouTube-Kanal
-  </a>
-  <div class="scroll-hint"><span></span></div>
+<!-- ── NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">Georgian<strong>Dream</strong></a>
+  <ul class="nav-links">
+    <li><a href="#themen">Themen</a></li>
+    <li><a href="#ressource">Ressource</a></li>
+    <li><a href="#ueber">Über Noah</a></li>
+    <li><a href="https://www.youtube.com/@noahhaendel" target="_blank" rel="noopener" class="nav-cta">YouTube ansehen →</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <canvas id="crossGrid"></canvas>
+  <div class="orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <span class="eyebrow">GeorgianDream · Von Noah</span>
+    <h1>
+      Weniger Steuern.<br>
+      Mehr Leben.<br>
+      <strong>Echter Einblick.</strong>
+    </h1>
+    <p class="hero-sub">
+      Für alle, die ernsthaft über Georgien nachdenken – besonders Selbstständige
+      und Familien, die sich ein neues Leben aufbauen wollen. Ungefiltert,
+      differenziert und ohne Urlaubsromantik.
+    </p>
+    <div class="hero-btns">
+      <a href="https://www.youtube.com/@noahhaendel" target="_blank" rel="noopener" class="btn-primary">
+        YouTube-Kanal ansehen →
+      </a>
+      <a href="#themen" class="btn-ghost">
+        Themen entdecken
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about">
-  <h2 class="section-title reveal">Unsere Geschichte</h2>
-  <p class="section-subtitle reveal">Keine Hochglanz-Auswanderträume — sondern echte Erfahrungen einer deutschen Familie in Georgien.</p>
-  <div class="about-grid">
-    <div class="about-card reveal">
-      <span class="about-icon">👨‍👩‍👧‍👦</span>
-      <h3>Familie & Werte</h3>
-      <p>Wir gehen als Familie diesen Weg — nach konservativen Werten, mit dem Glauben als Kompass.</p>
+<!-- ── MARQUEE ────────────────────────────────────────────────── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Georgien Auswandern</span>
+    <span class="marquee-item">1% Steuer</span>
+    <span class="marquee-item">Individual Entrepreneur</span>
+    <span class="marquee-item">Tbilisi</span>
+    <span class="marquee-item">Small Business Status</span>
+    <span class="marquee-item">Kaukasus</span>
+    <span class="marquee-item">Khinkali</span>
+    <span class="marquee-item">Weinberge</span>
+    <span class="marquee-item">Freiheit</span>
+    <span class="marquee-item">Ehrlich &amp; Direkt</span>
+    <span class="marquee-item">Expat-Familie</span>
+    <span class="marquee-item">Chacha</span>
+    <span class="marquee-item">Georgien Auswandern</span>
+    <span class="marquee-item">1% Steuer</span>
+    <span class="marquee-item">Individual Entrepreneur</span>
+    <span class="marquee-item">Tbilisi</span>
+    <span class="marquee-item">Small Business Status</span>
+    <span class="marquee-item">Kaukasus</span>
+    <span class="marquee-item">Khinkali</span>
+    <span class="marquee-item">Weinberge</span>
+    <span class="marquee-item">Freiheit</span>
+    <span class="marquee-item">Ehrlich &amp; Direkt</span>
+    <span class="marquee-item">Expat-Familie</span>
+    <span class="marquee-item">Chacha</span>
+  </div>
+</div>
+
+<!-- ── FACTS ──────────────────────────────────────────────────── -->
+<div id="facts">
+  <div class="facts-grid fade-in">
+    <div class="fact-item">
+      <span class="fact-number">März&nbsp;'26</span>
+      <span class="fact-label">Auswanderung</span>
     </div>
-    <div class="about-card reveal">
-      <span class="about-icon">🌿</span>
-      <h3>Selbstversorgung</h3>
-      <p>Eigener Garten, eigene Tiere, echtes Essen. Zurück zu den Wurzeln — selbstbestimmt und naturverbunden.</p>
+    <div class="fact-item">
+      <span class="fact-number">9</span>
+      <span class="fact-label">Themen-Kategorien</span>
     </div>
-    <div class="about-card reveal">
-      <span class="about-icon">🏔️</span>
-      <h3>Neues Leben</h3>
-      <p>Von Tiflis bis aufs Land — wir zeigen dir Grundstücke, Kosten, Bürokratie und den echten Alltag.</p>
+    <div class="fact-item">
+      <span class="fact-number">Tbilisi</span>
+      <span class="fact-label">Erste Destination</span>
+    </div>
+    <div class="fact-item">
+      <span class="fact-number">100%</span>
+      <span class="fact-label">Ungefiltert</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── THEMEN ─────────────────────────────────────────────────── -->
+<section id="themen">
+  <div class="section-header fade-in">
+    <span class="section-eyebrow">Was dich erwartet</span>
+    <h2>Alles was du wirklich<br><strong>wissen musst.</strong></h2>
+    <p class="section-sub">
+      Kein Reiseblog. Kein Steuerberater-Ratgeber. Echte Einblicke,
+      strukturiert nach den Themen, die beim Auswandern tatsächlich zählen.
+    </p>
+  </div>
+
+  <div class="themen-grid">
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">💰</span>
+      <div class="thema-title">Steuern &amp; Finanzen</div>
+      <div class="thema-desc">1% Steuer als Individual Entrepreneur, Small Business Status, Bankkonten &amp; Unternehmensformen</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🏠</span>
+      <div class="thema-title">Wohnen</div>
+      <div class="thema-desc">Mieten oder Kaufen, Stadtteile in Tbilisi, reale Kosten und Tipps aus erster Hand</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🍽️</span>
+      <div class="thema-title">Essen &amp; Kultur</div>
+      <div class="thema-desc">Georgische Küche, Traditionen, Gastfreundschaft und der Alltag in einer Stadt, die nie schläft</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">📋</span>
+      <div class="thema-title">Bürokratie</div>
+      <div class="thema-desc">Visum, Aufenthaltsstatus, Anmeldung und IE-Gründung – Schritt für Schritt erklärt</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🏥</span>
+      <div class="thema-title">Krankenversicherung</div>
+      <div class="thema-desc">Expat-Optionen, das georgische Gesundheitssystem und was es tatsächlich kostet</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🌍</span>
+      <div class="thema-title">Lifestyle &amp; Alltag</div>
+      <div class="thema-desc">Transport, Expat-Community, Freizeit und Leben als digitaler Selbstständiger in Georgien</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🏔️</span>
+      <div class="thema-title">Natur &amp; Reisen</div>
+      <div class="thema-desc">Kaukasus, Nationalparks, Weinregionen und die schönsten Wochenendtrips</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🌱</span>
+      <div class="thema-title">Selbstversorgung</div>
+      <div class="thema-desc">Marktkultur, Eigenanbau, Leben auf dem Land und günstig wohnen außerhalb Tbilisi</div>
+      <span class="thema-arrow">→</span>
+    </a>
+    <a href="#" class="thema-card fade-in">
+      <span class="thema-emoji">🗣️</span>
+      <div class="thema-title">Sprache</div>
+      <div class="thema-desc">Georgisch lernen: Grundlagen, Schrift, Ressourcen – und ehrlicher Realismus</div>
+      <span class="thema-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── RESSOURCE ──────────────────────────────────────────────── -->
+<section id="ressource">
+  <div class="ressource-inner">
+    <div class="fade-in">
+      <span class="ressource-badge">Kostenlose Ressource</span>
+      <h3>Dein Auswanderungs-<br><strong>Projektplan</strong></h3>
+      <p class="ressource-text">
+        Ich habe meine eigene Auswanderung mit einem Projektmanagement-Setup
+        durchgeplant – und bin froh darüber. Ohne wüsste ich nicht, was ich
+        in welcher Reihenfolge angehen muss oder was noch aussteht. Diese
+        Vorlage kannst du dir einfach kopieren und für deine eigene
+        Auswanderung nutzen.
+      </p>
+      <a href="#" class="btn-primary">Vorlage kostenlos holen →</a>
+      <span class="btn-note">Kein Account nötig · Als Airtable-Vorlage</span>
+    </div>
+    <div class="ressource-visual fade-in">
+      <ul class="checklist">
+        <li>Behörden &amp; Anmeldungen im Überblick</li>
+        <li>Steuer &amp; Unternehmensstruktur vorbereiten</li>
+        <li>Wohnung suchen &amp; sichern</li>
+        <li>Krankenversicherung für Expats klären</li>
+        <li>Bankkonten in Georgien eröffnen</li>
+        <li>Schule &amp; Kita recherchieren</li>
+        <li>Umzug &amp; Logistik planen</li>
+        <li>Erste Wochen – Community finden</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- TOPICS -->
-<section class="topics">
-  <h2 class="section-title reveal">Das erwartet dich</h2>
-  <p class="section-subtitle reveal">Ehrliche Einblicke, praktische Tipps und authentische Erfahrungen aus Georgien.</p>
-  <div class="topics-list reveal">
-    <div class="topic-tag"><span class="tag-icon">🏠</span>Haus & Grundstück</div>
-    <div class="topic-tag"><span class="tag-icon">💰</span>Kosten & Finanzen</div>
-    <div class="topic-tag"><span class="tag-icon">📋</span>Bürokratie & Visum</div>
-    <div class="topic-tag"><span class="tag-icon">🌱</span>Selbstversorgung</div>
-    <div class="topic-tag"><span class="tag-icon">👶</span>Auswandern mit Kindern</div>
-    <div class="topic-tag"><span class="tag-icon">🏙️</span>Leben in Tiflis</div>
-    <div class="topic-tag"><span class="tag-icon">🐓</span>Leben auf dem Land</div>
-    <div class="topic-tag"><span class="tag-icon">💼</span>Selbstständigkeit</div>
-    <div class="topic-tag"><span class="tag-icon">🍷</span>Kultur & Tradition</div>
-    <div class="topic-tag"><span class="tag-icon">☦️</span>Glaube & Werte</div>
+<!-- ── ÜBER NOAH ──────────────────────────────────────────────── -->
+<section id="ueber">
+  <div class="ueber-inner">
+    <div class="noah-visual fade-in">
+      <img src="me.jpg" alt="Noah" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+    </div>
+    <div class="ueber-content fade-in">
+      <span class="section-eyebrow">Wer steckt dahinter</span>
+      <h2>Ich bin Noah –<br><strong>und ich ziehe<br>nach Georgien.</strong></h2>
+      <div class="ueber-text">
+        <p>
+          In Deutschland geboren, in Deutschland aufgewachsen – und irgendwann
+          war klar: das kann nicht alles sein. Meine Familie und ich lieben die
+          Natur, gutes Essen und die Idee, ein Leben wirklich selbst zu
+          gestalten. Unser Ziel ist langfristig das Land: eigene Tiere, eigenes
+          Gemüse, vielleicht irgendwann eine kleine deutsche Community in
+          Georgien.
+        </p>
+        <p>
+          Ende März 2026 ist es so weit – wir wandern als Familie aus. Ich mache
+          diesen Kanal, weil ich mir selbst eine solche Ressource gewünscht
+          hätte. Als ich anfing, mich mit Georgien zu beschäftigen, gab es kaum
+          deutschsprachiges Videomaterial.
+        </p>
+        <p>
+          Das ändere ich jetzt. Ungefiltert, ehrlich und nah dran.
+        </p>
+      </div>
+      <div class="noah-tags">
+        <span class="noah-tag">Vater &amp; Ehemann</span>
+        <span class="noah-tag">Selbstständig</span>
+        <span class="noah-tag">Natur-Fan</span>
+        <span class="noah-tag">Kein Bullshit</span>
+        <span class="noah-tag">März '26</span>
+      </div>
+      <a href="https://www.youtube.com/@noahhaendel" target="_blank" rel="noopener" class="btn-primary">
+        YouTube-Kanal besuchen →
+      </a>
+    </div>
   </div>
 </section>
 
-<!-- QUOTE -->
-<section class="quote-section reveal">
-  <p class="quote-text">„Keine Hochglanz-Auswanderträume — sondern echte Erfahrungen."</p>
-  <p class="quote-caption">☦️ In God We Trust ☦️</p>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <h2 class="section-title reveal">Bereit für die Reise?</h2>
-  <p class="reveal">Abonniere unseren Kanal und begleite uns auf dem Weg in ein neues Leben in Georgien. Jeder Tipp, jede Erfahrung — für dich.</p>
-  <a href="https://www.youtube.com/@noahhaendel" class="yt-btn reveal" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-    Jetzt abonnieren
-  </a>
-  <div class="social-links reveal">
-    <a href="#" title="Instagram">📷</a>
-    <a href="#" title="Telegram">✈️</a>
-    <a href="#" title="E-Mail">✉️</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
 <footer>
-  <span class="cross">☦️</span>
-  © 2026 — Auswandern nach Georgien · Mit Glaube, Familie & Mut
+  <a href="#" class="footer-logo">Georgian<strong>Dream</strong></a>
+  <span class="footer-copy">© 2026 · Tbilisi, Georgien</span>
+  <div class="footer-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="https://www.youtube.com/@noahhaendel" target="_blank" rel="noopener">YouTube</a>
+  </div>
 </footer>
 
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
+  /* ── Cross-Grid Canvas ──────────────────────────────────── */
+  const canvas = document.getElementById('crossGrid');
+  const ctx    = canvas.getContext('2d');
+  const hero   = document.getElementById('hero');
+  let mouse    = { x: -9999, y: -9999 };
+  let time     = 0;
 
+  function resizeCanvas() {
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  window.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const spacing = 48;
+    const arm     = 4;
+    const cols    = Math.ceil(canvas.width  / spacing) + 1;
+    const rows    = Math.ceil(canvas.height / spacing) + 1;
+    time += 0.008;
+
+    for (let c = 0; c <= cols; c++) {
+      for (let r = 0; r <= rows; r++) {
+        const x = c * spacing;
+        const y = r * spacing;
+        const dist  = Math.hypot(mouse.x - x, mouse.y - y);
+        const prox  = Math.max(0, 1 - dist / 180);
+        const pulse = (Math.sin(time + c * 0.4 + r * 0.6) + 1) / 2;
+        const op    = Math.min(0.48, 0.07 + pulse * 0.05 + prox * 0.40);
+
+        ctx.strokeStyle = `rgba(74,124,89,${op})`;
+        ctx.lineWidth   = 1;
+        ctx.beginPath();
+        ctx.moveTo(x - arm, y); ctx.lineTo(x + arm, y);
+        ctx.moveTo(x, y - arm); ctx.lineTo(x, y + arm);
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(drawGrid);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  drawGrid();
+
+  /* ── Scroll Fade-In ─────────────────────────────────────── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── Stagger topic cards ────────────────────────────────── */
+  document.querySelectorAll('.thema-card.fade-in').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.06}s`;
+  });
+</script>
 </body>
 </html>
